@@ -7,7 +7,6 @@
 
 		<?php echo form_input('created_on', $date, 'maxlength="10" id="datepicker" class="text width-20 inputGridDate"') ?>
 		<br />
-		<br />
 
 		<?php foreach ($grid as $table): ?>
 
@@ -17,9 +16,11 @@
 
 			<thead>
 			<tr>
-				<th></th>
+				<th width="200"></th>
 				<?php foreach ($table['products'] as $product): ?>
-					<th><?php echo $product['title']; ?></th>
+					<th style="text-align: center">
+						<?php echo $product['title']; ?>
+					</th>
 				<?php endforeach; ?>
 			</tr>
 			</thead>
@@ -29,13 +30,17 @@
 				<?php foreach ($table['data'] as $index => $row): ?>
 				<tr>
 					<td>
-					<?php echo $index ?>
+						<?php echo $merchants[$index] ?>
 					</td>
 					<?php foreach ($table['products'] as $product): ?>
 						<?php if(isset($row[$product['id']])): ?>
-						<td><?php echo $row[$product['id']]; ?></td>
+						<td style="text-align: center">
+							<?php echo $row[$product['id']]; ?>
+						</td>
 						<?php else: ?>
-						<td>-</td>
+						<td style="text-align: center">
+							-
+						</td>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</tr>
@@ -46,46 +51,6 @@
 		</table>
 
 		<?php endforeach; ?>
-
-		<? /*
-
-	<?php if ($prices && $products): ?>
-		<table border="0" class="table-list" cellspacing="0">
-			<thead>
-			<tr>
-				<th></th>
-			<?php foreach ($products as $product): ?>
-				<th><?php echo $product['title']; ?></th>
-			<?php endforeach; ?>
-			</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($prices as $price): ?>
-				<tr>
-					<?php if(isset($price['title'] )): ?>
-					<td><?php echo $price['title']; ?></td>
-					<?php else: ?>
-					<td>&nbsp;</td>
-					<?php endif; ?>
-				<?php for($i=0;$i<5;$i++): ?>
-					<?php if(isset($price['values'][$i])): ?>
-					<td><?php echo $price['values'][$i] ?></td>
-					<?php else: ?>
-					<td>&nbsp;</td>
-					<?php endif; ?>
-				<?php endfor; ?>
-					<td class="align-center buttons buttons-small">
-						<?php echo anchor('admin/observer/merchant/'.$price['id'], lang('global:view'), 'class="button view"') ?>
-					</td>
-				</tr>
-			<?php endforeach ?>
-			</tbody>
-		</table>
-	<?php else: ?>
-		<div class="no_data"><?php echo lang('merchants:no_categories') ?></div>
-	<?php endif ?>
-
-	*/ ?>
 
 	</div>
 </section>

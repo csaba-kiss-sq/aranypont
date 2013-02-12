@@ -1,12 +1,13 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 
-class Admin_Collector extends Admin_Controller
+class Collector extends Public_Controller
 {
-	protected $section = 'collector';
- 
+	private $config = array();
+
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('observer_data_m');
 	}
 
 	public function index()
@@ -44,14 +45,5 @@ class Admin_Collector extends Admin_Controller
  				)); 
 			} 
 		}
-		 
-		/*
-		$url = 'http://golderado.hu/#tortarany-felvasarlas';
-		$html = file_get_contents($url);
-
-		phpQuery::newDocumentHTML($html, $charset = 'utf-8');
-		// 14k tört arany 
-		echo pq('.price_table:eq(1) tr:eq(2) td:eq(2)')->text();
-		*/
 	}
 }

@@ -139,30 +139,86 @@ class Module_Observer extends Module
 		$this->db->insert('observer_products', array('id' => 11, 'title' => '250g', 'observer_categories_id' => 2));
 		$this->db->insert('observer_products', array('id' => 12, 'title' => '500g', 'observer_categories_id' => 2));
 		$this->db->insert('observer_products', array('id' => 13, 'title' => '1000g', 'observer_categories_id' => 2));
-
 		$this->db->insert('observer_selectors', array(
-			'id' => 1, 
 			'url' => 'http://mak.magyararanykereskedo.hu/artable.php?friss=yes&dev=HUF&for=F&typ=TORTARANY14K', 
 			'selector' =>'table.beffhufTable td.beffhufadat', 
 			'observer_products_id' => 3, 
-			'observer_merchants_id' => 2
+			'observer_merchants_id' => 2 
 		));
-
 		$this->db->insert('observer_selectors', array(
-			'id' => 2, 
 			'url' => 'http://mak.magyararanykereskedo.hu/artable.php?friss=yes&dev=HUF&for=F&typ=TORTARANY18K', 
 			'selector' =>'table.beffhufTable td.beffhufadat', 
 			'observer_products_id' => 4, 
-			'observer_merchants_id' => 2
+			'observer_merchants_id' => 2 
 		));
-
 		$this->db->insert('observer_selectors', array(
-			'id' => 3, 
 			'url' => 'http://mak.magyararanykereskedo.hu/artable.php?friss=yes&dev=HUF&for=F&typ=TORTARANY24K', 
 			'selector' =>'table.beffhufTable td.beffhufadat', 
 			'observer_products_id' => 5, 
 			'observer_merchants_id' => 2
 		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortarany-ezust.hu/fooldal', 
+			'selector' => '.arany_tabla tr:eq(6) td:eq(1)', 
+			'observer_products_id' => 1, 
+			'observer_merchants_id' => 4
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortarany-ezust.hu/fooldal', 
+			'selector' => '.arany_tabla tr:eq(5) td:eq(1)', 
+			'observer_products_id' => 2, 
+			'observer_merchants_id' => 4
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortarany-ezust.hu/fooldal', 
+			'selector' => '.arany_tabla tr:eq(4) td:eq(1)', 
+			'observer_products_id' => 3, 
+			'observer_merchants_id' => 4
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortarany-ezust.hu/fooldal', 
+			'selector' => '.arany_tabla tr:eq(3) td:eq(1)', 
+			'observer_products_id' => 4, 
+			'observer_merchants_id' => 4
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortarany-ezust.hu/fooldal', 
+			'selector' => '.arany_tabla tr:eq(1) td:eq(1)', 
+			'observer_products_id' => 5, 
+			'observer_merchants_id' => 4
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://golderado.hu/', 
+			'selector' => '.price_table:eq(1) tr:eq(2) td:eq(1)', 
+			'observer_products_id' => 1, 
+			'observer_merchants_id' => 3
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://golderado.hu/', 
+			'selector' => '.price_table:eq(1) tr:eq(2) td:eq(2)', 
+			'observer_products_id' => 3, 
+			'observer_merchants_id' => 3
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortaranyat.hu/', 
+			'selector' => 'table.arany.arany2 #k14cont', 
+			'observer_products_id' => 3, 
+			'observer_merchants_id' => 5
+		));
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.tortaranyat.hu/', 
+			'selector' => 'table.arany.arany2 #k18cont', 
+			'observer_products_id' => 4, 
+			'observer_merchants_id' => 5
+		));
+		/*
+		$this->db->insert('observer_selectors', array(
+			'url' => 'http://www.aranypiac.hu/arfolyamok', 
+			'selector' => '.arfolyamok tr:eq(3) td:eq(1) a', 
+			'observer_products_id' => 6, 
+			'observer_merchants_id' => 6
+		));
+		*/
 
 		// todo
 		$this->db->insert('observer_data', array('id' => 1, 'observer_products_id' => 1, 'observer_merchants_id' => 1, 'price' => 6000, 'created' => 0)); 

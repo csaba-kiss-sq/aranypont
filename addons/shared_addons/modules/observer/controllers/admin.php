@@ -33,7 +33,6 @@ class Admin extends Admin_Controller
 		$categories = $this->db->select()->order_by('id', 'ASC')->get('observer_categories')->result_array();
 
 		foreach ($categories as $category) {
-
 			$result[$category['id']] = array(
 				'title' => $category['title']
 			);
@@ -43,42 +42,20 @@ class Admin extends Admin_Controller
 
 		foreach ($products as $product) {
 			$result[$product['observer_categories_id']]['products'][$product['id']] = $product;
-
 			$data = $this->db->select()
 				->where('observer_data.created < ', $date." 23:59:59" )
 				->where('observer_data.observer_products_id =', $product['id'])
 				->group_by(array('observer_merchants_id','observer_products_id'))
 				->order_by('created', 'DESC')
 				->get('observer_data')->result_array();
-
-			$order = array();
-
 			foreach ($data as $key => $value) {
-			/*	$order[$value['observer_merchants_id']]['values'][$value['observer_products_id']] = $value['price'];
-				$order[$value['observer_merchants_id']]['id'] = $value['observer_merchants_id'];
-				if(isset($merchants[$value['observer_merchants_id']])) {
-					$order[$value['observer_merchants_id']]['title'] = $merchants[$value['observer_merchants_id']];
-				}*/
-
 				$result[$product['observer_categories_id']]['data'][$value['observer_merchants_id']][$value['observer_products_id']]  = $value['price']; 
 			}	
-
-
-			// $result[$product['observer_categories_id']]['data'][] = $data;
 		}
-/*
-		echo '<pre>';
-		var_dump($result);
-		echo '</pre>';
 
-		die;
-*/
-		return array(
-			'date' => $date,
-			'grid' => $result
-		);
-
-		/*
+		foreach ($categories as $category) {
+			ksort($result[$category['id']]['data']);
+		}
 
 		$merchants = array();
 		$tmp = $this->db->select()->order_by('id', 'ASC')->get('observer_merchants')->result_array();
@@ -87,30 +64,11 @@ class Admin extends Admin_Controller
 		}
 		unset($tmp);
 
-		$products = $this->db->select()->order_by('id', 'ASC')->get('observer_products')->result_array();
-
-		$data = $this->db->select()
-			->where( 'observer_data.created < ', $date." 23:59:59" )
-			->group_by(array('observer_merchants_id','observer_products_id'))
-			->order_by('created', 'DESC')
-			->get('observer_data')->result_array();
-
-		$order = array();
-
-		foreach ($data as $key => $value) {
-			$order[$value['observer_merchants_id']]['values'][$value['observer_products_id']] = $value['price'];
-			$order[$value['observer_merchants_id']]['id'] = $value['observer_merchants_id'];
-			if(isset($merchants[$value['observer_merchants_id']])) {
-				$order[$value['observer_merchants_id']]['title'] = $merchants[$value['observer_merchants_id']];
-			}
-		}
-
 		return array(
-			'products' => $products,
-			'prices'   => $order,
-			'date'     => $date
+			'date'      => $date,
+			'grid'      => $result,
+			'merchants' => $merchants
 		);
-		*/
 	}
 
 	public function merchant() 
@@ -135,8 +93,8 @@ class Admin extends Admin_Controller
 			}
 		*/
 
-/*
-chartOptions.series = [{
+		/*
+		chartOptions.series = [{
             name: 'Termék 1',
             data: [2.0, 3.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
         }, {
