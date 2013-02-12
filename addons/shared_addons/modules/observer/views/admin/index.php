@@ -9,6 +9,46 @@
 		<br />
 		<br />
 
+		<?php foreach ($grid as $table): ?>
+
+		<h4><?php echo $table["title"] ?></h4>
+
+		<table border="0" class="table-list" cellspacing="0">
+
+			<thead>
+			<tr>
+				<th></th>
+				<?php foreach ($table['products'] as $product): ?>
+					<th><?php echo $product['title']; ?></th>
+				<?php endforeach; ?>
+			</tr>
+			</thead>
+
+			<?php if(isset($table['data'])): ?>
+			<tbody>
+				<?php foreach ($table['data'] as $index => $row): ?>
+				<tr>
+					<td>
+					<?php echo $index ?>
+					</td>
+					<?php foreach ($table['products'] as $product): ?>
+						<?php if(isset($row[$product['id']])): ?>
+						<td><?php echo $row[$product['id']]; ?></td>
+						<?php else: ?>
+						<td>-</td>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+			<?php endif; ?>
+
+		</table>
+
+		<?php endforeach; ?>
+
+		<? /*
+
 	<?php if ($prices && $products): ?>
 		<table border="0" class="table-list" cellspacing="0">
 			<thead>
@@ -44,6 +84,9 @@
 	<?php else: ?>
 		<div class="no_data"><?php echo lang('merchants:no_categories') ?></div>
 	<?php endif ?>
+
+	*/ ?>
+
 	</div>
 </section>
 
