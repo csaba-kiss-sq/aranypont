@@ -116,19 +116,55 @@ class Module_Observer extends Module
 			),
 		));
 		$this->db->insert('observer_categories', array('id' => 1, 'title' => 'törtarany'));
+		$this->db->insert('observer_categories', array('id' => 2, 'title' => 'befektetési aranytömb'));
 
-		$this->db->insert('observer_merchants', array('id' => 1, 'title' => 'Aranypont0', 'website' => 'localhost0', 'description' => 'Saját árak és termékek', 'map' => '' ));
-		$this->db->insert('observer_merchants', array('id' => 2, 'title' => 'Aranypont2', 'website' => 'localhost1', 'description' => 'Saját árak és termékek', 'map' => '' ));
-		$this->db->insert('observer_merchants', array('id' => 3, 'title' => 'Aranypont3', 'website' => 'localhost2', 'description' => 'Saját árak és termékek', 'map' => '' ));
-		$this->db->insert('observer_merchants', array('id' => 4, 'title' => 'Aranypont4', 'website' => 'localhost4', 'description' => 'Saját árak és termékek', 'map' => '' ));
-		$this->db->insert('observer_merchants', array('id' => 5, 'title' => 'Aranypont5', 'website' => 'localhost5', 'description' => 'Saját árak és termékek', 'map' => '' ));
-		
-		$this->db->insert('observer_products', array('id' => 1, 'title' => '8kt törtarany', 'observer_categories_id' => 1));
-		$this->db->insert('observer_products', array('id' => 2, 'title' => '9kt törtarany', 'observer_categories_id' => 1));
-		$this->db->insert('observer_products', array('id' => 3, 'title' => '14kt törtarany', 'observer_categories_id' => 1));
-		$this->db->insert('observer_products', array('id' => 4, 'title' => '18kt törtarany', 'observer_categories_id' => 1));
-		$this->db->insert('observer_products', array('id' => 5, 'title' => '24kt törtarany', 'observer_categories_id' => 1));
-		
+		$this->db->insert('observer_merchants', array('id' => 1, 'title' => 'Aranypont (saját)', 'website' => 'localhost0', 'description' => 'Saját árak és termékek', 'map' => '' ));
+		$this->db->insert('observer_merchants', array('id' => 2, 'title' => 'Aranyatveszek', 'website' => 'http://www.aranyatveszek.hu/', 'description' => '', 'map' => '' ));
+		$this->db->insert('observer_merchants', array('id' => 3, 'title' => 'Golderado', 'website' => 'http://golderado.hu/', 'description' => '', 'map' => '' ));
+		$this->db->insert('observer_merchants', array('id' => 4, 'title' => 'Törtarany-ezüst', 'website' => 'http://www.tortarany-ezust.hu/fooldal', 'description' => '', 'map' => '' ));
+		$this->db->insert('observer_merchants', array('id' => 5, 'title' => 'Tortaranyat.hu', 'website' => 'http://www.tortaranyat.hu/', 'description' => '', 'map' => '' ));
+		$this->db->insert('observer_merchants', array('id' => 6, 'title' => 'Aranypiac', 'website' => 'http://www.aranypiac.hu/', 'description' => '', 'map' => '' ));
+		$this->db->insert('observer_merchants', array('id' => 7, 'title' => 'Conclude', 'website' => 'http://www.conclude.hu', 'description' => '', 'map' => '' ));
+
+		$this->db->insert('observer_products', array('id' => 1, 'title' => '8kt', 'observer_categories_id' => 1));
+		$this->db->insert('observer_products', array('id' => 2, 'title' => '9kt', 'observer_categories_id' => 1));
+		$this->db->insert('observer_products', array('id' => 3, 'title' => '14kt', 'observer_categories_id' => 1));
+		$this->db->insert('observer_products', array('id' => 4, 'title' => '18kt', 'observer_categories_id' => 1));
+		$this->db->insert('observer_products', array('id' => 5, 'title' => '24kt', 'observer_categories_id' => 1));
+		$this->db->insert('observer_products', array('id' => 6, 'title' => '5g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 7, 'title' => '10g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 8, 'title' => '20g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 9, 'title' => '50g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 10, 'title' => '100g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 11, 'title' => '250g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 12, 'title' => '500g', 'observer_categories_id' => 2));
+		$this->db->insert('observer_products', array('id' => 13, 'title' => '1000g', 'observer_categories_id' => 2));
+
+		$this->db->insert('observer_selectors', array(
+			'id' => 1, 
+			'url' => 'http://mak.magyararanykereskedo.hu/artable.php?friss=yes&dev=HUF&for=F&typ=TORTARANY14K', 
+			'selector' =>'table.beffhufTable td.beffhufadat', 
+			'observer_products_id' => 3, 
+			'observer_merchants_id' => 2
+		));
+
+		$this->db->insert('observer_selectors', array(
+			'id' => 2, 
+			'url' => 'http://mak.magyararanykereskedo.hu/artable.php?friss=yes&dev=HUF&for=F&typ=TORTARANY18K', 
+			'selector' =>'table.beffhufTable td.beffhufadat', 
+			'observer_products_id' => 4, 
+			'observer_merchants_id' => 2
+		));
+
+		$this->db->insert('observer_selectors', array(
+			'id' => 3, 
+			'url' => 'http://mak.magyararanykereskedo.hu/artable.php?friss=yes&dev=HUF&for=F&typ=TORTARANY24K', 
+			'selector' =>'table.beffhufTable td.beffhufadat', 
+			'observer_products_id' => 5, 
+			'observer_merchants_id' => 2
+		));
+
+		// todo
 		$this->db->insert('observer_data', array('id' => 1, 'observer_products_id' => 1, 'observer_merchants_id' => 1, 'price' => 6000, 'created' => 0)); 
 		$this->db->insert('observer_data', array('id' => 2, 'observer_products_id' => 2, 'observer_merchants_id' => 1, 'price' => 6500, 'created' => 0)); 
 		$this->db->insert('observer_data', array('id' => 3, 'observer_products_id' => 3, 'observer_merchants_id' => 1, 'price' => 7200, 'created' => 0)); 

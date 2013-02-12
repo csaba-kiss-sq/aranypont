@@ -27,8 +27,6 @@ class Admin_Merchants extends Admin_Controller
 			'field' => 'map',
 			'rules' => 'trim|string'
 		)
-
-
 	);
 
 	public function __construct()
