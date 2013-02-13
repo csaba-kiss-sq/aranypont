@@ -9,7 +9,85 @@ class Admin extends Admin_Controller
 		parent::__construct();
 
 		$this->load->model(array('observer_data_m'));
-		$this->lang->load(array('observer', 'merchants'));
+		$this->load->model(array('observer_categories_m'));
+		$this->load->model(array('observer_merchants_m'));
+		$this->load->model(array('observer_products_m'));
+		$this->lang->load(array('observer','merchants'));
+	}
+
+	public function charts()
+	{
+		/*
+		$products = $this->observer_products_m->get_dropdown();
+
+		$lines = array();
+
+		foreach($products as $product_id => $product_title) 
+		{
+			$pricesArray = array();
+
+			$data = $this->db->select()
+				->where('observer_data.observer_products_id = ', $product_id)
+				->where('observer_data.observer_merchants_id = ', 4)
+				->order_by('created', 'DESC')
+				->get('observer_data')->result_array();
+
+			$data = array_reverse($data);
+
+			foreach ($data as $key => $value) 
+			{
+				$pricesArray[] = $value['price'];
+			}
+			
+			$prices = implode(', ', $pricesArray);
+			$lines[] = '{name: \''.$product_title.'\', data: ['.$prices.']}';
+		}
+		*/
+
+		$merchants = $this->observer_merchants_m->get_dropdown();
+
+		$lines = array();
+
+		foreach($merchants as $merchant_id => $merchant_title) 
+		{
+			$pricesArray = array();
+
+			$data = $this->db->select()
+				->where('observer_data.observer_products_id = ', 4)
+				->where('observer_data.observer_merchants_id = ', $merchant_id)
+				->order_by('created', 'DESC')
+				->get('observer_data')->result_array();
+
+			$data = array_reverse($data);
+
+			foreach ($data as $key => $value) 
+			{
+				$pricesArray[] = $value['price'];
+			}
+			
+			$prices = implode(', ', $pricesArray);
+			$lines[] = '{name: \''.$merchant_title.'\', data: ['.$prices.']}';
+		}
+
+ 
+		$json = 'series = ['. implode(', ', $lines).'];';
+
+		$series = array(
+			'series' => json_encode(array(
+				'name' => 'Termék 1',
+				'data' => $pricesArray,
+			)),
+			'json' => $json,
+			'categories' => $this->observer_categories_m->get_dropdown(),
+			'merchants'  => $this->observer_merchants_m->get_dropdown(),
+			'products'   => $this->observer_products_m->get_dropdown(),
+		);
+
+		$this->template
+			->enable_parser(true)
+			->title($this->module_details['name'])
+			->append_js('module::highcharts.js')
+			->build('admin/charts', $series);
 	}
 
 	public function grid($date) 
@@ -75,19 +153,7 @@ class Admin extends Admin_Controller
 	{
 		$this->input->is_ajax_request() and $this->template->set_layout(false);
 
-		$data = $this->db->select()
-			->where( 'observer_data.observer_products_id = ', 1 )
-			->where( 'observer_data.observer_merchants_id = ', 2 )
-			->order_by('created', 'DESC')
-			->get('observer_data')->result_array();
-
-		$data = array_reverse($data);
-
-		foreach ($data as $key => $value) {
-			$pricesArray[] = $value['price'];
-		}
-		$prices = implode(', ', $pricesArray);
-
+		
 		/*	foreach ($data as $key => $value) {
 				$prices[$value['observer_products_id']] = $value['price'];
 			}
@@ -107,7 +173,6 @@ class Admin extends Admin_Controller
             name: 'Termék 4',
             data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
         }];
-
         */
 
 		$json = "series = [{name: 'Termék 1', data: [".$prices."]}];";

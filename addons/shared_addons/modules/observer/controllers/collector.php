@@ -14,14 +14,15 @@ class Collector extends Public_Controller
 	{
 		$this->load->helper('phpQuery');
 		$selectors = $this->db->select()->get('observer_selectors')->result_array();
-		$date =  date("Y-m-d H:i:s");
+		$date = date("Y-m-d H:i:s");
+		$dateHourly = date("Y-m-d H:i:s", time()-3600);
 
 		foreach ($selectors as $selector) {
 		
 			$dataRow = $this->db->select()
 				->where('observer_data.observer_products_id =', $selector['observer_products_id'])
 				->where('observer_data.observer_merchants_id =', $selector['observer_merchants_id'])
-				// ->where( 'observer_data.created < ', $date." 23:59:59" ) 
+			    ->where( 'observer_data.created > ', $dateHourly ) 
 				->get('observer_data')->row();
 
 			$content = file_get_contents($selector['url']);

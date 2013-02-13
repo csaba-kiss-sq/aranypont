@@ -24,6 +24,10 @@ class Module_Observer extends Module
 					'name' => 'observer:title',
 					'uri' => 'admin/observer',
 				),
+				'charts' => array(
+					'name' => 'observer:charts_title',
+					'uri' => 'admin/observer/charts',
+				),
 				'merchants' => array(
 					'name' => 'Kereskedők',
 					'uri' => 'admin/observer/merchants',

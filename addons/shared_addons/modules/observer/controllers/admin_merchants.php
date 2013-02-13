@@ -4,7 +4,6 @@ class Admin_Merchants extends Admin_Controller
 {
 	protected $section = 'merchants';
 
-	/** @var array The validation rules */
 	protected $validation_rules = array(
 		array(
 			'field' => 'title',
@@ -57,14 +56,10 @@ class Admin_Merchants extends Admin_Controller
 			->build('admin/merchants/index');
 	}
 
-	/**
-	 * Create method, creates a new category
-	 */
 	public function create()
 	{
 		$merchant = new stdClass;
 
-		// Validate the data
 		if ($this->form_validation->run())
 		{
 			if ($id = $this->observer_merchants_m->insert($this->input->post()))
@@ -84,7 +79,6 @@ class Admin_Merchants extends Admin_Controller
 
 		$merchant = new stdClass();
 
-		// Loop through each validation rule
 		foreach ($this->validation_rules as $rule)
 		{
 			$merchant->{$rule['field']} = set_value($rule['field']);
@@ -97,11 +91,6 @@ class Admin_Merchants extends Admin_Controller
 			->build('admin/merchants/form');
 	}
 
-	/**
-	 * Edit method, edits an existing category
-	 *
-	 * @param int $id The ID of the category to edit
-	 */
 	public function edit($id = 0)
 	{
 		// Get the category
@@ -186,13 +175,6 @@ class Admin_Merchants extends Admin_Controller
 		redirect('admin/observer/merchants/index');
 	}
 
-	/**
-	 * Callback method that checks the title of the category
-	 *
-	 * @param string $title The title to check
-	 *
-	 * @return bool
-	 */
 	public function _check_title($title = '')
 	{
 		if ($this->observer_merchants_m->check_title($title, $this->input->post('id')))
@@ -203,61 +185,5 @@ class Admin_Merchants extends Admin_Controller
 		}
 
 		return true;
-	}
-
-	/**
-	 * Create method, creates a new category via ajax
-	 */
-	public function create_ajax()
-	{
-		$category = new stdClass();
-
-		// Loop through each validation rule
-		foreach ($this->validation_rules as $rule)
-		{
-			$category->{$rule['field']} = set_value($rule['field']);
-		}
-
-		$data = array(
-			'mode' => 'create',
-			'category' => $category,
-		);
-
-		if ($this->form_validation->run())
-		{
-			$id = $this->observer_merchant_m->insert_ajax($this->input->post());
-
-			if ($id > 0)
-			{
-				$message = sprintf(lang('merchants:add_success'), $this->input->post('title', true));
-			}
-			else
-			{
-				$message = lang('merchants:add_error');
-			}
-
-			return $this->template->build_json(array(
-				'message' => $message,
-				'title' => $this->input->post('title'),
-				'category_id' => $id,
-				'status' => 'ok'
-			));
-		}
-		else
-		{
-			// Render the view
-			$form = $this->load->view('admin/categories/form', $data, true);
-
-			if ($errors = validation_errors())
-			{
-				return $this->template->build_json(array(
-					'message' => $errors,
-					'status' => 'error',
-					'form' => $form
-				));
-			}
-
-			echo $form;
-		}
 	}
 }
