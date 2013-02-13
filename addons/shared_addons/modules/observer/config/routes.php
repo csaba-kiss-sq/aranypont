@@ -9,4 +9,5 @@ $route['(blog)/rss/(:any).rss']         = 'rss/category/$2';
 
 // admin
 */
-$route['observer/admin/merchants(/:any)?'] = 'admin_merchants$1';
+$route['observer/admin/merchants(/:any)?']  = 'admin_merchants$1';
+$route['observer/admin/categories(/:any)?'] = 'admin_categories$1';

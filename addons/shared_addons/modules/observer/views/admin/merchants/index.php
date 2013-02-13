@@ -15,7 +15,6 @@
 				<th width="20"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all')) ?></th>
 				<th><?php echo lang('merchants:category_label') ?></th>
 				<th><?php echo lang('global:slug') ?></th>
-				<th width="120"></th>
 			</tr>
 			</thead>
 			<tfoot>
